@@ -1,0 +1,13 @@
+# Lint rules for the backend. Run from this folder: `python -m ruff check app`
+line-length = 220
+target-version = "py312"
+
+[lint]
+# E9: syntax errors. F: unused or undefined names. B: likely bugs.
+select = ["E9", "F", "B"]
+# B008: FastAPI's `Depends(...)` in a default argument is how the framework is meant to be used.
+ignore = ["B008"]
+
+[lint.per-file-ignores]
+# Fixtures are imported for pytest to find, and passed in by name.
+"tests/*" = ["F401", "F811", "F841", "B017"]

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- An open envelope with a ticked letter: mail that has been dealt with. -->
+  <g stroke="#1AA3B8" stroke-width="2.6">
+    <path d="M4.5 21.5 10.5 25M2.5 32h8M4.5 42.5 10.5 39"/>
+    <path d="M59.5 21.5 53.5 25M61.5 32h-8M59.5 42.5 53.5 39"/>
+  </g>
+  <g stroke="#1F4257" stroke-width="2.8">
+    <!-- back of the envelope, with the open flap's peak -->
+    <path d="M14 31 32 13.5 50 31v20.5a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3Z" fill="#fff"/>
+    <!-- the letter -->
+    <rect x="18.5" y="15" width="27" height="30" rx="2.2" fill="#fff"/>
+    <!-- front of the envelope -->
+    <path d="M14 31 32 44.5 50 31v20.5a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3Z" fill="#fff"/>
+    <path d="M15.5 53 32 41l16.5 12"/>
+  </g>
+  <circle cx="32" cy="26" r="7.2" fill="#1AA3B8"/>
+  <path d="m28.6 26.2 2.4 2.4 4.5-4.9" stroke="#fff" stroke-width="2.2"/>
+</svg>

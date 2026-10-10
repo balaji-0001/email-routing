@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest>=8.3
+# HTTP client behind FastAPI's TestClient
+httpx2>=2.13
+# Lint: `python -m ruff check app` from the backend folder
+ruff>=0.9

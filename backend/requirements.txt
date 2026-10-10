@@ -1,0 +1,11 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.34,<1
+sqlalchemy>=2.0.40,<2.1
+pymysql>=1.1,<2
+# PyMySQL needs this for MySQL 8's default password authentication
+cryptography>=44
+alembic>=1.15,<2
+pydantic-settings>=2.8,<3
+email-validator>=2.2,<3
+argon2-cffi>=23.1
+tzdata>=2025.1

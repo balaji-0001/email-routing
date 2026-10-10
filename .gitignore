@@ -44,6 +44,18 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Replit
-.cache/
-.local/
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Python backend
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Local MySQL data and log (see `pnpm db:start`)
+local-mysql/

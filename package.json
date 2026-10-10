@@ -1,16 +1,24 @@
 {
-  "name": "workspace",
+  "name": "email-management-saas",
   "version": "0.0.0",
-  "license": "MIT",
-  "scripts": {
-    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
-    "build": "pnpm run typecheck && pnpm -r --if-present run build",
-    "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
-  },
   "private": true,
-  "dependencies": {
-    "@replit/connectors-sdk": "^0.4.3"
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.9"
+  },
+  "scripts": {
+    "preinstall": "node -e \"const fs=require('fs');for(const f of['package-lock.json','yarn.lock'])fs.rmSync(f,{force:true});if(!String(process.env.npm_config_user_agent).startsWith('pnpm/')){console.error('Use pnpm instead');process.exit(1)}\"",
+    "setup": "node scripts/tasks.mjs setup",
+    "dev": "node scripts/tasks.mjs dev",
+    "dev:api": "node scripts/tasks.mjs api",
+    "dev:web": "pnpm --filter frontend run dev",
+    "db:start": "node scripts/tasks.mjs db:start",
+    "db:stop": "node scripts/tasks.mjs db:stop",
+    "db:status": "node scripts/tasks.mjs db:status",
+    "db:migrate": "node scripts/tasks.mjs migrate",
+    "test": "node scripts/tasks.mjs test",
+    "typecheck": "pnpm --filter frontend run typecheck",
+    "build": "pnpm run typecheck && pnpm --filter frontend run build"
   },
   "devDependencies": {
     "prettier": "^3.9.6",

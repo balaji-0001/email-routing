@@ -1,0 +1,243 @@
+/* Appearance: "current" is the glass design in index.css and needs nothing here.
+   "light" and "dark" replace its translucent surfaces with flat ones.
+   Loaded last. Both share one set of rules; only the colours below differ. */
+
+html[data-theme=light]{
+  /* After Gmail: one soft blue-grey background, white rounded panels, Google blue for actions. */
+  --t-page:#f6f8fc;--t-surface:#ffffff;--t-surface-2:#f2f6fc;--t-hover:#e9eef6;--t-active:#d3e3fd;
+  --t-border:#e3e8ef;--t-border-2:#c7ccd4;
+  --t-text:#1f1f1f;--t-strong:#1f1f1f;--t-text-2:#444746;--t-accent:#0b57d0;
+  --t-primary:#0b57d0;--t-primary-hover:#0842a0;--t-on-primary:#ffffff;
+  --t-shadow:none;--t-shadow-pop:0 4px 8px 3px rgba(60,64,67,.15),0 1px 3px rgba(60,64,67,.3);
+  --t-warn-bg:#fff6e0;--t-error-bg:#fdecea;--t-error-text:#8f1d15;--t-error-border:#f3c6c1;
+  --t-skeleton:#e9edf2;--t-skeleton-hi:#f6f8fa;
+  --t-compose:#c2e7ff;--t-on-compose:#001d35;--t-search:#eaf1fb;--t-row-lift:inset 1px 0 0 #dadce0,inset -1px 0 0 #dadce0,0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);
+}
+html[data-theme=dark]{
+  color-scheme:dark;
+  --t-page:#0e1116;--t-surface:#171b22;--t-surface-2:#1e242d;--t-hover:#242b36;--t-active:#2b3544;
+  --t-border:#2a313c;--t-border-2:#3b4554;
+  --t-text:#c8d0db;--t-strong:#f1f4f8;--t-text-2:#8f9bac;--t-accent:#74b4ff;
+  --t-primary:#2f6fed;--t-primary-hover:#4a84f5;--t-on-primary:#ffffff;
+  --t-shadow:0 1px 2px rgba(0,0,0,.4);--t-shadow-pop:0 18px 44px -12px rgba(0,0,0,.7),0 2px 8px rgba(0,0,0,.4);
+  --t-warn-bg:#33270f;--t-error-bg:#3a1c1a;--t-error-text:#ffb4a9;--t-error-border:#6b2a25;
+  --t-skeleton:#222933;--t-skeleton-hi:#2c3542;
+}
+
+/* the switch itself, in every look */
+.theme-picker{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line-2);border-radius:999px;background:rgba(255,255,255,.5)}
+.theme-picker button{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:var(--copy-2);font:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.theme-picker button:hover{color:var(--navy)}
+.theme-picker button.picked{background:var(--navy);color:#fff}
+.popover-section{padding:8px 10px 10px;margin:4px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.popover-section small{display:block;margin-bottom:7px;font-size:12.5px;font-weight:600;color:var(--copy-2)}
+.account-popover{width:310px}
+.appearance-panel{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding:18px 20px}
+.appearance-panel h2{margin:0;font-size:16px;color:var(--navy)}
+.appearance-panel p{margin:3px 0 0;font-size:13.5px;color:var(--copy-2)}
+
+/* ---- light and dark ---- */
+html:is([data-theme=light],[data-theme=dark]){
+  --navy:var(--t-strong);--copy:var(--t-text);--copy-2:var(--t-text-2);
+  --line:var(--t-border);--line-2:var(--t-border-2);--rim:var(--t-border);
+  --glass:var(--t-surface);--glass-hi:var(--t-surface);--glass-lo:var(--t-surface-2);
+  --frost:none;--glass-shadow:var(--t-shadow);--lift-1:var(--t-shadow);--lift-2:var(--t-shadow-pop);--lift-3:var(--t-shadow-pop);
+  --accent-flow:var(--t-accent);--focus-ring:0 0 0 3px color-mix(in srgb,var(--t-accent) 30%,transparent);
+}
+html[data-theme=dark]{--ink:var(--t-strong)}
+
+html:is([data-theme=light],[data-theme=dark]) :is(body,.app-shell,.auth-screen){background:var(--t-page);color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.aurora,.auth-shapes,.auth-card:before){display:none}
+
+/* frames and surfaces */
+html:is([data-theme=light],[data-theme=dark]) :is(.sidebar,.topbar,.ol-ribbon,.ol-folders,.ol-list,.ol-compose){background:var(--t-surface);border-color:var(--t-border);-webkit-backdrop-filter:none;backdrop-filter:none}
+html:is([data-theme=light],[data-theme=dark]) .ol-read{background:var(--t-page)}
+html:is([data-theme=light],[data-theme=dark]) :is(.panel,.metric-card,.ol-message,.sync-panel,.welcome-strip,.ai-banner,.webhook-intro,.role-intro,.note-banner,.account-privacy,.usage-inline,.usage-list,.settings-control-row,.confirm-modal,.shell-popover,.ol-menu-pop,.auth-card,.rule-list .rule-row,.message-card,.attachment-card,.inline-reply){background:var(--t-surface);border-color:var(--t-border);box-shadow:var(--t-shadow);-webkit-backdrop-filter:none;backdrop-filter:none}
+html:is([data-theme=light],[data-theme=dark]) :is(.shell-popover,.ol-menu-pop,.confirm-modal){box-shadow:var(--t-shadow-pop)}
+html:is([data-theme=light],[data-theme=dark]) .sync-attention{background:var(--t-warn-bg)}
+html:is([data-theme=light],[data-theme=dark]) :is(.data-table th,.permission-table th,.ol-group,.access-row>td,.access-invite,.empty-icon,.welcome-icon,.settings-form-icon,.ol-images-note){background:var(--t-surface-2)}
+
+/* text */
+html:is([data-theme=light],[data-theme=dark]) :is(.brand,.page-heading h1,.panel-head h2,.panel-head h3,.metric-value,.table-person b,.table-toolbar b,.empty-state h3,.activity-text b,.ol-list-head b,.ol-read-head h1,.ol-message-who b,.ol-sender,.ol-row.unread .ol-sender,.sync-head b,.access-head b,.access-modes b,.access-title,.ol-file b,.shell-popover>b,.workspace-copy b,.profile-menu b,.crumb b,.settings-form-head h2,.auth-card h1,.auth-brand){color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.page-heading p,.panel-head p,.nav-label,.crumb,.eyebrow,.data-table th,.metric-card,.metric-title,.metric-delta,.table-person small,.table-toolbar span,.empty-state p,.activity-text small,.ol-preview,.ol-row-mid time,.ol-message-who small,.ol-message-head time,.ol-list-head small,.shell-popover>span,.workspace-copy small,.profile-menu small,.settings-form-head p,.settings-form-footer>span,.field-hint,.auth-sub,.auth-switch,.auth-forgot,.auth-field>span:first-child,.session-row small,.global-search,.ol-search){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.data-table td,.activity-text p,.ol-subject,.ol-text,.field span,.session-row b,.message-body,.auth-remember,.shell-popover>a,.shell-popover>button,.ol-menu-item,.nav-item,.ol-folder){color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.text-link,.activity-link,.ol-link,.ol-images-note button,.ol-folder b,.ol-row.unread .ol-subject,.ol-row.unread .ol-row-mid time,.auth-switch a,.auth-switch button,.auth-forgot:hover){color:var(--t-accent)}
+html:is([data-theme=light],[data-theme=dark]) .auth-switch{text-shadow:none}
+html:is([data-theme=light],[data-theme=dark]) :is(.icon-button,.ol-icon,.ol-folder svg,.ol-row-icons,.crumb svg,.shell-popover>a svg,.shell-popover>button svg,.ol-file svg,.auth-field-icon){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .brand-mark span{background:var(--t-accent)}
+
+/* navigation and rows */
+html:is([data-theme=light],[data-theme=dark]) :is(.nav-item:hover,.ol-folder:hover,.ol-row:hover,.data-table tbody tr:hover,.icon-button:hover,.ol-icon:hover:not(:disabled),.ol-cmd:hover:not(:disabled),.shell-popover>a:hover,.shell-popover>button:hover,.ol-menu-item:hover,.settings-tabs a:hover,a.ol-file:hover,.organization-row:hover,.notification-row:hover){background:var(--t-hover);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.nav-item.active,.ol-folder.active,.ol-row.active,.ol-row.checked,.settings-tabs a.selected,.access-modes label.picked){background:var(--t-active);color:var(--t-strong);box-shadow:none;border-color:var(--t-border-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.nav-item.active svg,.ol-folder.active svg){color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .ol-row.unread:before{background:var(--t-accent)}
+html:is([data-theme=light],[data-theme=dark]) .settings-tabs a{color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .access-row:hover{background:transparent}
+
+/* controls */
+html:is([data-theme=light],[data-theme=dark]) :is(.button,.ol-file,.role-pill,.schedule-type,.workspace-switch,.access-modes label,.access-people,.form-note,.auth-notice){background:var(--t-surface);border-color:var(--t-border-2);color:var(--t-strong);box-shadow:none}
+html:is([data-theme=light],[data-theme=dark]) :is(.button:hover,.workspace-switch:hover,.workspace-switch[aria-expanded=true]){background:var(--t-hover);border-color:var(--t-border-2);box-shadow:none}
+html:is([data-theme=light],[data-theme=dark]) :is(.form-note,.auth-notice,.role-pill){color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.field input,.field select,.invite-input-row input,.invite-input-row select,.table-search,.search-wide,.global-search,.ol-search,.ol-filter select,.ol-folder-select,.access-person select,.access-invite input,.ol-menu-form input,.ol-label-form input,.ol-label-name,.auth-field,.global-search kbd){background:var(--t-surface-2);border-color:var(--t-border-2);color:var(--t-strong);box-shadow:none}
+html:is([data-theme=light],[data-theme=dark]) :is(.field input:focus,.field select:focus,.global-search:focus-within,.ol-search:focus-within,.auth-field:focus-within,.ol-label-form input:focus,.ol-label-name:focus){background:var(--t-surface);border-color:var(--t-accent);box-shadow:var(--focus-ring)}
+html:is([data-theme=light],[data-theme=dark]) :is(.field input:hover,.field select:hover,.auth-field:hover,.global-search:hover){background:var(--t-surface-2);border-color:var(--t-border-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.field input[readonly],.field select:disabled){background:var(--t-page);color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.global-search input,.ol-search input,.auth-field input,.ol-line input,.ol-line select,.ol-body-input,.inline-reply textarea){color:var(--t-strong);background:transparent}
+html:is([data-theme=light],[data-theme=dark]) :is(input,textarea)::placeholder{color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .ol-line:focus-within{background:var(--t-surface-2)}
+html:is([data-theme=light],[data-theme=dark]) .ol-cmd{color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .ol-cmd:disabled{color:var(--t-text-2);opacity:.55}
+html:is([data-theme=light],[data-theme=dark]) :is(.button-primary,.compose-button,.ol-cmd-primary,.auth-submit,.theme-picker button.picked,a.auth-submit),
+html:is([data-theme=light],[data-theme=dark]) :is(.button-primary,.compose-button,.ol-cmd-primary,.auth-submit):hover:not(:disabled){background:var(--t-primary);color:var(--t-on-primary);border-color:transparent;box-shadow:none}
+html:is([data-theme=light],[data-theme=dark]) :is(.button-primary,.compose-button,.ol-cmd-primary,.auth-submit):hover:not(:disabled){background:var(--t-primary-hover)}
+html:is([data-theme=light],[data-theme=dark]) .ol-cmd-primary:disabled{color:var(--t-on-primary);opacity:.5}
+html:is([data-theme=light],[data-theme=dark]) .compose-button kbd{color:var(--t-on-primary);border-color:rgba(255,255,255,.35)}
+html:is([data-theme=light],[data-theme=dark]) .theme-picker{background:var(--t-surface-2);border-color:var(--t-border-2)}
+html:is([data-theme=light],[data-theme=dark]) .theme-picker button{color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .theme-picker button:hover{color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.form-error,.auth-notice-error){background:var(--t-error-bg);border-color:var(--t-error-border);color:var(--t-error-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.field-error,.auth-field-error){color:var(--t-error-text)}
+html:is([data-theme=light],[data-theme=dark]) .sk{background-image:linear-gradient(90deg,var(--t-skeleton) 25%,var(--t-skeleton-hi) 37%,var(--t-skeleton) 63%)}
+html:is([data-theme=light],[data-theme=dark]) :is(.sync-bar,.usage-meter,.health-line){background:var(--t-border)}
+html:is([data-theme=light],[data-theme=dark]) .auth-remember i{background:var(--t-surface-2);border-color:var(--t-border-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.auth-remember input:checked+i,.checkbox.checked,.nav-item.active .nav-count){background:var(--t-primary);border-color:var(--t-primary);color:var(--t-on-primary)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ol-check input,.access-modes input,.ol-file-option input){accent-color:var(--t-primary)}
+html:is([data-theme=light],[data-theme=dark]) .mobile-scrim{background:rgba(0,0,0,.45)}
+html:is([data-theme=light],[data-theme=dark]) .sidebar{background:var(--t-surface)}
+
+/* dark only: things that assume a light page */
+html[data-theme=dark] .ol-html{background:#fff;border-radius:10px;width:calc(100% - 32px);padding:0}
+html[data-theme=dark] .ol-chip-account{background:var(--t-surface-2);color:var(--t-text-2)}
+html[data-theme=dark] :is(.metric-icon.blue,.metric-icon.amber,.metric-icon.green,.metric-icon.violet){background:var(--t-surface-2)}
+html[data-theme=dark] .metric-icon.blue{color:#7cb7ff}html[data-theme=dark] .metric-icon.amber{color:#f2c36b}html[data-theme=dark] .metric-icon.green{color:#6fd3a0}html[data-theme=dark] .metric-icon.violet{color:#b9a5f2}
+html[data-theme=dark] .sync-head svg,html[data-theme=dark] .sync-complete .sync-head svg{color:var(--t-accent)}
+html[data-theme=dark] .sync-attention .sync-head svg{color:#f2c36b}
+html[data-theme=dark] .you-tag{background:rgba(18,160,137,.22);color:#7fe3c8}
+html[data-theme=dark] .avatar{filter:brightness(.92)}
+html[data-theme=dark] .ol-flagged{color:#ff9d6c;fill:#ff9d6c}
+html[data-theme=dark] .toast-message{background:#2a3340;border-color:var(--t-border-2)}
+
+/* status words (Connected, Syncing, Error): dark enough to read on a light page, light enough on a dark one */
+:root{--status-ok:#13703a;--status-info:#1d4ed8;--status-warn:#a24a06;--status-bad:#b42318}
+html[data-theme=dark]{--status-ok:#5fd28e;--status-info:#74b4ff;--status-warn:#f2c36b;--status-bad:#ff8f84}
+html:is([data-theme=light],[data-theme=dark]) :is(.profile-photo-row b,.profile-photo-row strong){color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.profile-photo-row small,.profile-photo-row span:not(.avatar),.access-modes small,.access-head small,.sync-head small,.appearance-panel p){color:var(--t-text-2)}
+html[data-theme=dark] :is(.profile-photo-row small,.access-modes label.picked small){color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) .appearance-panel h2{color:var(--t-strong)}
+/* initials need a surface of their own on a dark page */
+html[data-theme=dark] .avatar{background:var(--t-active);color:var(--t-strong);filter:none}
+
+/* assignment, notes, notifications and the collaboration pages */
+html:is([data-theme=light],[data-theme=dark]) :is(.ol-notes h2,.collab-notification.unread .collab-note-text b){color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ol-notes h2 small,.ol-save-state,.collab-note-text small,.collab-note-text time,.collab-note-text em,.collab-preview){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .collab-note-text b{color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ol-note-form textarea,.collab-form textarea){background:var(--t-surface-2);border-color:var(--t-border-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ol-note-form textarea:focus,.collab-form textarea:focus){background:var(--t-surface);border-color:var(--t-accent)}
+html:is([data-theme=light],[data-theme=dark]) a.collab-notification:hover{background:var(--t-hover)}
+html:is([data-theme=light],[data-theme=dark]) .collab-note-icon{background:var(--t-surface-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .collab-unread{background:var(--t-accent)}
+html[data-theme=dark] .ol-note{background:#3a3112;border-color:#5f5120;color:#f3e6b3}
+html[data-theme=dark] :is(.ol-note-head time,.ol-note-head .ol-icon){color:#cdbb7a}
+html[data-theme=dark] .ol-chip-assignee{background:rgba(116,180,255,.16);color:#9cc8ff}
+html[data-theme=dark] .ol-draft-tag{color:#ff8f84}
+
+/* the mark on a dark page: light lines around the page's own surface */
+html[data-theme=dark] .brand-icon{--mark-line:#dfe7f1;--mark-fill:var(--t-surface);--mark-accent:#3cc0d4}
+html[data-theme=dark] .auth-screen .brand-icon{--mark-fill:var(--t-page)}
+
+/* ---- light only: the shapes that make it read like Gmail ---- */
+/* Each selector goes through `body` so it outranks the shared light/dark rules above. */
+/* frames share the page colour, with no dividing lines */
+html[data-theme=light] body :is(.sidebar,.topbar,.ol-ribbon,.ol-folders){background:var(--t-page);border-color:transparent}
+html[data-theme=light] body :is(.panel,.metric-card,.sync-panel,.welcome-strip){border-color:transparent}
+html[data-theme=light] body .sync-attention{border-color:#f0dca0}
+/* navigation: full pills, light blue for where you are */
+html[data-theme=light] body :is(.nav-item,.ol-folder){border-radius:999px}
+html[data-theme=light] body :is(.nav-item.active,.ol-folder.active){background:var(--t-active);border-color:transparent;font-weight:700}
+html[data-theme=light] body .nav-item:before{display:none}
+html[data-theme=light] body :is(.ol-folder b,.nav-item.active .nav-count){color:var(--t-strong);background:transparent}
+/* Compose is light blue with dark text; other main buttons are Google blue */
+html[data-theme=light] body :is(.compose-button,.ol-ribbon .ol-cmd-primary),
+html[data-theme=light] body :is(.compose-button,.ol-ribbon .ol-cmd-primary):hover:not(:disabled){background:var(--t-compose);color:var(--t-on-compose);border-radius:16px;box-shadow:none}
+html[data-theme=light] body :is(.compose-button,.ol-ribbon .ol-cmd-primary):hover:not(:disabled){box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15)}
+html[data-theme=light] body .compose-button{height:54px}
+html[data-theme=light] body .compose-button kbd{color:var(--t-on-compose);border-color:rgba(0,29,53,.3)}
+html[data-theme=light] body .ol-ribbon .ol-cmd-primary:disabled{color:var(--t-on-compose);opacity:.5}
+html[data-theme=light] body .button{border-radius:999px;color:var(--t-accent)}
+html[data-theme=light] body .button-primary{color:var(--t-on-primary)}
+/* search: a tinted pill that turns white when used */
+html[data-theme=light] body :is(.global-search,.ol-search),html[data-theme=light] body .global-search:hover{background:var(--t-search);border-color:transparent}
+html[data-theme=light] body :is(.global-search:focus-within,.ol-search:focus-within){background:#fff;border-color:transparent;box-shadow:0 1px 1px rgba(65,69,73,.3),0 1px 3px 1px rgba(65,69,73,.15)}
+/* the inbox: white rounded panels on the page; read mail is tinted, unread is white and bold */
+html[data-theme=light] body .ol-body{padding:0 12px 12px 0}
+html[data-theme=light] body .ol-list{border-radius:16px 0 0 16px;border-color:transparent;overflow:hidden}
+html[data-theme=light] body .ol-read{background:#fff;border-radius:0 16px 16px 0;border-left:1px solid var(--t-border)}
+html[data-theme=light] body .ol-compose{border-radius:0 16px 16px 0}
+html[data-theme=light] body .ol-group{background:#fff;color:var(--t-text-2)}
+html[data-theme=light] body .ol-row{background:var(--t-surface-2);border-bottom-color:#e6eaf0}
+html[data-theme=light] body .ol-row.unread{background:#fff}
+html[data-theme=light] body .ol-row:hover{background:var(--t-surface-2);box-shadow:var(--t-row-lift);z-index:1}
+html[data-theme=light] body .ol-row.unread:hover{background:#fff}
+html[data-theme=light] body :is(.ol-row.active,.ol-row.checked),html[data-theme=light] body :is(.ol-row.active,.ol-row.checked):hover{background:#c2dbff}
+html[data-theme=light] body .ol-row.unread:before{display:none}
+html[data-theme=light] body :is(.ol-row.unread .ol-subject,.ol-row.unread .ol-row-mid time){color:var(--t-strong)}
+html[data-theme=light] body .ol-list-head{border-bottom-color:var(--t-border)}
+html[data-theme=light] body .ol-chip-assignee{background:#d3e3fd;color:#0842a0}
+/* tables and small surfaces */
+html[data-theme=light] body .data-table tbody tr:hover{box-shadow:var(--t-row-lift)}
+html[data-theme=light] body .access-row:hover{box-shadow:none}
+html[data-theme=light] body .theme-picker{background:var(--t-search);border-color:transparent}
+html[data-theme=light] body .auth-card{box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15);border-color:transparent}
+@media(max-width:1260px){html[data-theme=light] body .ol-body{padding:0 8px 8px}}
+@media(max-width:940px){html[data-theme=light] body :is(.ol-list,.ol-read,.ol-compose){border-radius:16px;border-left:0}}
+html:is([data-theme=light],[data-theme=dark]) :is(.auto-group legend,.auto-test b,.auto-rule-text b,.auto-switch-row b,.auto-mini b,.auto-caps b){color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.auto-rule-text p,.auto-people label,.auto-none){color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ol-menu-title,.auto-test small,.auto-test li span,.auto-rule-text small,.auto-controls h3,.auto-switch-row p,.auto-overview h3,.auto-mini small,.auto-caps small,.auto-mini em,.auto-cap-later b,.auto-cap-later svg){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.auto-group,.ol-menu-title,.auto-rule+.auto-rule,.auto-switch-row+.auto-switch-row,.auto-mini li+li,.auto-caps li+li){border-color:var(--t-border-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.auto-action select,.auto-icon){background:var(--t-surface-2);border-color:var(--t-border-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .auto-icon:hover:not(:disabled){background:var(--t-hover)}
+html:is([data-theme=light],[data-theme=dark]) .auto-action select:focus{border-color:var(--t-accent)}
+html:is([data-theme=light],[data-theme=dark]) .auto-bad{color:var(--status-bad)}
+html[data-theme=dark] .auto-test{background:rgba(95,210,142,.12)}
+html[data-theme=dark] .ol-chip-priority.ol-priority-urgent{background:rgba(255,143,132,.18);color:#ffb0a8}
+html[data-theme=dark] .ol-chip-priority.ol-priority-high{background:rgba(242,160,90,.2);color:#ffc999}
+html[data-theme=dark] .ol-chip-priority.ol-priority-low{background:rgba(116,180,255,.18);color:#a9d0ff}
+html[data-theme=dark] .auto-state-on{background:rgba(95,210,142,.18);color:#8fe3b1}
+html[data-theme=dark] .auto-state-off{background:rgba(255,255,255,.1);color:#c3cad6}
+html:is([data-theme=light],[data-theme=dark]) .auto-recent b{color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .auto-recent p:not(.auto-recent-result){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .auto-recent-go label{color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) .auto-recent-go select{background:var(--t-surface-2);border-color:var(--t-border-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ai-summary,.ai-draft-subject,.ai-stop b,.ai-insight>header b){color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ai-asks,.ai-hold ul){color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ai-reason,.ai-draft>header small,.ai-reply small,.ai-stop p,.ai-state-skip){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ai-no-reply,.ai-plain){background:var(--t-surface-2);color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.ai-reply pre,.ai-reply textarea){background:var(--t-surface-2);border-color:var(--t-border-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .ai-reply textarea:focus{background:var(--t-surface);border-color:var(--t-accent)}
+html:is([data-theme=light],[data-theme=dark]) .ai-insight{background:var(--t-surface);border-color:var(--t-border-2)}
+html:is([data-theme=light],[data-theme=dark]) .ai-stop-on b{color:var(--status-bad)}
+html:is([data-theme=light],[data-theme=dark]) .ai-tabs button{color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) .ai-tabs button.selected{background:var(--t-surface-2);color:var(--t-strong)}
+html[data-theme=dark] .ai-priority-low{background:rgba(116,180,255,.18);color:#a9d0ff}
+html[data-theme=dark] .ai-priority-medium{background:rgba(242,195,107,.18);color:#f6d48e}
+html[data-theme=dark] :is(.ai-priority-high,.ai-risk){background:rgba(255,143,132,.18);color:#ffb0a8}
+html[data-theme=dark] .ai-needs-reply{background:rgba(160,150,255,.2);color:#c9c2ff}
+html[data-theme=dark] .ai-hold{background:rgba(242,195,107,.12)}
+html[data-theme=dark] .ai-hold b{color:#f6d48e}
+html:is([data-theme=light],[data-theme=dark]) .ai-limit{background:var(--t-surface-2);border-color:var(--t-border-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .remind{color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.remind>svg,.remind label){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) :is(.remind select,.remind button){background:var(--t-surface-2);border-color:var(--t-border-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .remind button:hover{background:var(--t-hover)}
+html:is([data-theme=light],[data-theme=dark]) :is(.viz-legend,.viz-facts dt,.viz-toggle){color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) :is(.viz-empty,.viz-name small){color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .viz-facts dd{color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) :is(.viz-facts div+div,.viz-toggle){border-color:var(--t-border-2)}
+html:is([data-theme=light],[data-theme=dark]) .viz-toggle:hover{background:var(--t-hover)}
+html[data-theme=dark] .viz-tip{background:#232936;border-color:#39414f;color:#e8ecf3;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+html:is([data-theme=light],[data-theme=dark]) .ai-writer{border-color:var(--t-border-2);background:var(--t-surface-2)}
+html:is([data-theme=light],[data-theme=dark]) .ai-writer>b{color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .ai-writer li{background:var(--t-hover);color:var(--t-text)}
+html:is([data-theme=light],[data-theme=dark]) .ai-writer small{color:var(--t-text-2)}
+html:is([data-theme=light],[data-theme=dark]) .ai-writer-row input{background:var(--t-surface);border-color:var(--t-border-2);color:var(--t-strong)}
+html:is([data-theme=light],[data-theme=dark]) .ai-writer-row input:focus{border-color:var(--t-accent)}
