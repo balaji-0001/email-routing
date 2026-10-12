@@ -59,3 +59,6 @@ __pycache__/
 
 # Local MySQL data and log (see `pnpm db:start`)
 local-mysql/
+
+# Vercel project link (local)
+.vercel
