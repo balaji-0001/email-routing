@@ -1,0 +1,38 @@
+# The API on Render. The web app is served by Vercel, which forwards /api to this service (see vercel.json).
+services:
+  - type: web
+    name: email-routing-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # Tables are brought up to date on every start, then the API runs as ONE process:
+    # mail sync, rules, reminders and AI all run inside it.
+    startCommand: python -m alembic upgrade head && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips="*"
+    healthCheckPath: /api/healthz
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.3
+      - key: APP_ENV
+        value: production
+      # The address of the web app on Vercel, e.g. https://your-project.vercel.app
+      - key: APP_URL
+        sync: false
+      # mysql+pymysql://user:password@host:port/database
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_SSL
+        value: "true"
+      # Only if the database provider gives you its own certificate.
+      - key: DATABASE_CA
+        sync: false
+      # A long random secret. Set once and never change: it protects the stored mailbox connections.
+      - key: ENCRYPTION_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

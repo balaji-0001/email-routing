@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     port: int = 5000
     log_level: str = "info"
     database_url: str = "mysql+pymysql://root@127.0.0.1:3308/email_management"
+    # Hosted databases only accept encrypted connections. DATABASE_SSL=true turns that on;
+    # DATABASE_CA holds the provider's certificate (the PEM text) when it is not one every machine already trusts.
+    database_ssl: bool = False
+    database_ca: str | None = None
 
     # Where the web app is served. Used for links in emails and to reject
     # state-changing requests that come from any other origin.

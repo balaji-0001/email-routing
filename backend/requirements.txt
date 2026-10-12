@@ -7,5 +7,7 @@ cryptography>=44
 alembic>=1.15,<2
 pydantic-settings>=2.8,<3
 email-validator>=2.2,<3
+# HTTP client for the Gmail API, Google sign-in and the AI service (and FastAPI's test client)
+httpx2>=2.13
 argon2-cffi>=23.1
 tzdata>=2025.1

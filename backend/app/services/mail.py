@@ -81,9 +81,9 @@ def original_attachments(db: Session, identity: Identity, message_id: int) -> li
     except ReconnectRequired as exc:
         raise AppError(409, "RECONNECT_REQUIRED", f"{account.email_address} needs to be reconnected before its attachments can be opened.") from exc
     except (GmailApiError, OSError) as exc:
-        raise AppError(502, "MAILBOX_UNREACHABLE", "Could not reach the mailbox to get the attachment. Try again in a moment.") from exc
+        raise AppError(503, "MAILBOX_UNREACHABLE", "Could not reach the mailbox to get the attachment. Try again in a moment.") from exc
     except Exception as exc:  # noqa: BLE001 - IMAP libraries raise their own error types
-        raise AppError(502, "MAILBOX_UNREACHABLE", "Could not reach the mailbox to get the attachment. Try again in a moment.") from exc
+        raise AppError(503, "MAILBOX_UNREACHABLE", "Could not reach the mailbox to get the attachment. Try again in a moment.") from exc
     if raw is None:
         raise AppError(404, "ATTACHMENT_UNAVAILABLE", "The original email is no longer in the mailbox, so its attachments cannot be opened.")
     return extract_attachments(raw)

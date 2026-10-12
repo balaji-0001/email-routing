@@ -463,7 +463,7 @@ def write_with_ai(db: Session, identity: Identity, instruction: str, current: st
     try:
         result = writer.write_email(provider, instruction=instruction, current=current, thread=thread, business_info=setting.business_info, signature=identity.user.name, replying=conversation_id is not None)
     except AIError as exc:
-        raise AppError(502, "AI_UNAVAILABLE", f"{exc} Nothing was changed; try again in a moment.") from exc
+        raise AppError(503, "AI_UNAVAILABLE", f"{exc} Nothing was changed; try again in a moment.") from exc
     return {"subject": result.subject, "body": result.body}
 
 

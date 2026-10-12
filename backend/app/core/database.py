@@ -6,7 +6,20 @@ from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 from app.core.config import get_settings
 
-engine = create_engine(get_settings().database_url, pool_pre_ping=True, pool_recycle=3600)
+def connect_args() -> dict:
+    """Extra connection settings: an encrypted, verified connection when the database is a hosted one."""
+    settings = get_settings()
+    if not settings.database_ssl:
+        return {}
+    import ssl
+
+    # With the provider's own certificate if one was given, otherwise the certificates this machine trusts.
+    # Either way the server's identity is checked; the connection is never merely "encrypted to someone".
+    context = ssl.create_default_context(cadata=settings.database_ca.replace("\\n", "\n")) if settings.database_ca else ssl.create_default_context()
+    return {"ssl": context}
+
+
+engine = create_engine(get_settings().database_url, pool_pre_ping=True, pool_recycle=3600, connect_args=connect_args())
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
 

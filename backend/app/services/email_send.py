@@ -144,7 +144,7 @@ def send_message(
         raise AppError(409, "RECONNECT_REQUIRED", f"{account.email_address} needs to be reconnected before it can send.") from exc
     except Exception as exc:
         logger.warning("Sending from account %s failed: %s", account.id, type(exc).__name__)
-        raise AppError(502, "SEND_FAILED", f"{account.email_address} could not send the email. Nothing was sent; check the account's connection and try again.") from exc
+        raise AppError(503, "SEND_FAILED", f"{account.email_address} could not send the email. Nothing was sent; check the account's connection and try again.") from exc
 
     # From here on the email has been accepted by the provider. If saving our record of it fails,
     # that must never look like a failed send: the caller would send it again.

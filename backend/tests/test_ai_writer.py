@@ -49,11 +49,11 @@ def test_ai_trouble_changes_nothing_and_says_so(client, member, google, ai):
     for trouble in (503, "timeout"):
         ai.fail = trouble
         failed = client.post(WRITE, json={"instruction": "write a thank you"})
-        assert failed.status_code == 502 and failed.json()["error"]["code"] == "AI_UNAVAILABLE" and "Nothing was changed" in failed.json()["error"]["message"]
+        assert failed.status_code == 503 and failed.json()["error"]["code"] == "AI_UNAVAILABLE" and "Nothing was changed" in failed.json()["error"]["message"]
     ai.fail = None
     for bad in ("not json", {"subject": "s", "body": ""}, {"subject": "s"}):
         ai.answer = bad
-        assert client.post(WRITE, json={"instruction": "write a thank you"}).status_code == 502
+        assert client.post(WRITE, json={"instruction": "write a thank you"}).status_code == 503
     ai.answer = {"subject": "Thanks", "body": "Hi, thank you. Ada"}
     assert "test-key" not in json.dumps(client.post(WRITE, json={"instruction": "write a thank you"}).json())
 

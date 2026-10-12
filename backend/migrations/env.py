@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, pool
 
 import app.models  # noqa: F401  (registers every table on Base.metadata)
 from app.core.config import get_settings
-from app.core.database import Base
+from app.core.database import Base, connect_args
 
 config = context.config
 if config.config_file_name is not None:
@@ -22,7 +22,7 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    engine = create_engine(database_url, poolclass=pool.NullPool)
+    engine = create_engine(database_url, poolclass=pool.NullPool, connect_args=connect_args())
     with engine.connect() as connection:
         context.configure(connection=connection, target_metadata=target_metadata, compare_type=True)
         with context.begin_transaction():
